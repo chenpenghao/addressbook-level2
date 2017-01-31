@@ -8,12 +8,25 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
+    public static final String EXAMPLE = "a/123, Clementi Ave 3, #12-34, 231534";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    
+    /**
+     * indices for components of an address
+     */
+	private static final int COMPONENTS_BLOCK = 0;
+	private static final int COMPONENTS_STREET = 1;
+	private static final int COMPONENTS_UNIT = 2;
+	private static final int COMPONENTS_POSTALCODE = 3;
 
     public final String value;
     private boolean isPrivate;
+    
+    private static AddressBlock block;
+    private static AddressStreet street;
+    private static AddressUnit unit;
+    private static AddressPostalCode postalCode;
 
     /**
      * Validates given address.
@@ -22,6 +35,8 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         String trimmedAddress = address.trim();
+        String[] components = trimmedAddress.split(",");
+        createComponents(components);
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
@@ -29,7 +44,15 @@ public class Address {
         this.value = trimmedAddress;
     }
 
-    /**
+    private void createComponents(String[] components) {
+        this.setBlock(new AddressBlock(components[COMPONENTS_BLOCK]));
+        this.setStreet(new AddressStreet(components[COMPONENTS_STREET]));
+        this.setUnit(new AddressUnit(components[COMPONENTS_UNIT]));
+        this.setPostalCode(new AddressPostalCode(components[COMPONENTS_POSTALCODE]));
+		
+	}
+
+	/**
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidAddress(String test) {
@@ -56,4 +79,36 @@ public class Address {
     public boolean isPrivate() {
         return isPrivate;
     }
+
+	public static AddressBlock getBlock() {
+		return block;
+	}
+
+	public void setBlock(AddressBlock block) {
+		Address.block = block;
+	}
+
+	public static AddressStreet getStreet() {
+		return street;
+	}
+
+	public void setStreet(AddressStreet street) {
+		Address.street = street;
+	}
+
+	public static AddressUnit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(AddressUnit unit) {
+		Address.unit = unit;
+	}
+
+	public static AddressPostalCode getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(AddressPostalCode postalCode) {
+		Address.postalCode = postalCode;
+	}
 }
