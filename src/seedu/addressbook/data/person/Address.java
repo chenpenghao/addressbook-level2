@@ -73,7 +73,10 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.toString().equals(((Address) other).toString())); // state check
+                && this.getBlock().equals(((Address) other).getBlock())
+                && this.getStreet().equals(((Address) other).getStreet())
+                && this.getUnit().equals(((Address) other).getUnit())
+                && this.getPostalCode().equals(((Address) other).getPostalCode())); // state check
     }
 
     @Override
@@ -85,7 +88,7 @@ public class Address {
         return isPrivate;
     }
 
-	public static AddressBlock getBlock() {
+	public AddressBlock getBlock() {
 		return block;
 	}
 
@@ -93,7 +96,7 @@ public class Address {
 		Address.block = block;
 	}
 
-	public static AddressStreet getStreet() {
+	public AddressStreet getStreet() {
 		return street;
 	}
 
@@ -101,7 +104,7 @@ public class Address {
 		Address.street = street;
 	}
 
-	public static AddressUnit getUnit() {
+	public AddressUnit getUnit() {
 		return unit;
 	}
 
@@ -109,7 +112,7 @@ public class Address {
 		Address.unit = unit;
 	}
 
-	public static AddressPostalCode getPostalCode() {
+	public AddressPostalCode getPostalCode() {
 		return postalCode;
 	}
 
