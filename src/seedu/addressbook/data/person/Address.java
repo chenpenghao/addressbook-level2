@@ -20,9 +20,11 @@ public class Address {
 	private static final int COMPONENTS_UNIT = 2;
 	private static final int COMPONENTS_POSTALCODE = 3;
 
-    public final String value;
     private boolean isPrivate;
     
+    /**
+     * Different components of the address
+     */
     private static AddressBlock block;
     private static AddressStreet street;
     private static AddressUnit unit;
@@ -41,7 +43,6 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
     }
 
     private void createComponents(String[] components) {
@@ -61,19 +62,23 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        String res = this.getBlock().toString() + ","
+        		+ this.getStreet().toString()
+        		+ this.getUnit().toString()
+        		+ this.getPostalCode().toString();
+        return res;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
