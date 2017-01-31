@@ -21,7 +21,7 @@ public class Formatter {
 	}
 
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    private static final String LINE_PREFIX = "|| ";
+	private static final String LINE_PREFIX = "|| ";
 
     /** A platform independent line separator. */
     private static final String LS = System.lineSeparator();
@@ -48,8 +48,8 @@ public class Formatter {
 	 * Show methods, which takes in a String array and print out according to formats.
 	 * @param message
 	 */
-	
-	public void showToUser(String... message) {
+    
+    public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }

@@ -33,6 +33,10 @@ public class TextUi {
         this.in = new Scanner(in);
         this.formatter = new Formatter(out);
     }
+    
+    public Formatter getFormatter(){
+    	return this.formatter;
+    }
 
     /**
      * Returns true if the user input line should be ignored.
