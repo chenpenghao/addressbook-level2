@@ -4,10 +4,10 @@ public class AddressStreet {
 	private String value;
 	private boolean isPrivate;
 	
-	public AddressStreet(String block){
-		this.value = block;
+	public AddressStreet(String street) {
+		this.value = street;
 	}
-	
+
 	@Override
 	public String toString(){
 		return value;
